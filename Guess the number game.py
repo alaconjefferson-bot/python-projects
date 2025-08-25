@@ -1,28 +1,46 @@
-import random  # para makagamit tayo ng random number
+# ============================
+# GUESS THE NUMBER GAME 🎲
+# ============================
 
-# 1. Gumawa ng secret number (1 hanggang 100)
+# 1. Import the random library
+# Bakit? Kasi hindi tayo pwedeng gumawa ng "totoong random" number
+# gamit lang ng math. May built-in library si Python na gagawa nito.
+import random
+
+# 2. Gumawa tayo ng random number
+# random.randint(1, 100) → ibig sabihin bubunot siya ng number
+# mula 1 hanggang 100 (kasama ang 1 at 100).
 secret_number = random.randint(1, 100)
 
-print("🎮 Welcome to Guess the Number Game!")
-print("Hulaan mo ang number (1 to 100).")
-
-# 2. Gumawa ng loop para makapag-try si user ng paulit-ulit
+# 3. Infinite loop gamit ang while True
+# Ang loop na ito ay tuloy-tuloy hangga’t hindi natin sinasabing "break".
+# Para siyang laro na walang tigil hanggang mahulaan ang number.
 while True:
-    # Kumuha ng input kay user
-    guess = input("Ilagay hula mo: ")
+    # 4. Humingi ng input sa user
+    guess = input("Hulaan mo ang number (1–100): ")
 
-    # Check kung number ba yung in-enter
+    # 5. Error checking
+    # .isdigit() → chine-check kung lahat ng character ay digit (0–9).
+    # Kung hindi number ang nilagay ng user, magbibigay tayo ng warning
+    # at magpapatuloy lang ang loop (hindi babagsak yung program).
     if not guess.isdigit():
-        print("❌ Paki-type number lang, hindi text.")
-        continue  # balik sa loop
+        print("❌ Oops! Kailangan number lang ang ilagay.")
+        continue  # balik sa umpisa ng loop
 
-    guess = int(guess)  # convert input to integer
+    # 6. Convert string → integer
+    # Lahat ng input() sa Python ay string by default.
+    # Kaya kailangan natin gawing int para makumpara sa secret_number.
+    guess = int(guess)
 
-    # 3. Check kung tama hula
-    if guess == secret_number:
-        print("🎉 Tama! Ang secret number ay:", secret_number)
-        break  # tapusin na yung game
-    elif guess < secret_number:
-        print("📉 Masyadong mababa. Subukan mo ulit.")
+    # 7. Gamit ng if / elif / else para sa decision making
+    if guess < secret_number:
+        print("📉 Ang hula mo ay MABABA. Subukan ulit!")
+    elif guess > secret_number:
+        print("📈 Ang hula mo ay MATAAS. Subukan ulit!")
     else:
-        print("📈 Masyadong mataas. Try again.")
+        # Kapag wala sa less-than o greater-than, ibig sabihin TAMA!
+        print("🎉 Tama ka! Ang number ay:", secret_number)
+
+        # 8. break → tatapusin na ang loop
+        # Dahil nakuha na ang tamang sagot, ayaw na nating ipagpatuloy.
+        break
